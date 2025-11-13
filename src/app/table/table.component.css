@@ -66,6 +66,8 @@ h3 {
 .modal-content {
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  font-family: 'Prompt', 'Sarabun', 'Tahoma', sans-serif;
+
 }
 
 .modal-header {
@@ -73,11 +75,14 @@ h3 {
   color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  
 }
 
 .modal-title {
   font-weight: bold;
   color: white;
+  font-family: 'Prompt', 'Sarabun', 'Tahoma', sans-serif;
+
 }
 
 .modal-footer .btn-primary {

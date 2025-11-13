@@ -52,65 +52,116 @@
   </nz-table>
 </div>
 <!-- Modal Form -->
-<div
-  class="modal fade"
+ <div
+  class="modal fade bd-example-modal-lg"
   id="formModal"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="exampleModalLabel"
+  aria-labelledby="myLargeModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
           กรุณากรอกข้อมูลการใช้งาน
         </h5>
       </div>
+
       <div class="modal-body">
-        <label>ชื่อ</label>
-        <input type="text" [(ngModel)]="name" class="form-control" />
-        <label>นามสกุล</label>
-        <input type="text" [(ngModel)]="surname" class="form-control" />
-        <label>วันเกิด</label>
-        <input
-          [(bsValue)]="date1"
-          type="text"
-          [(ngModel)]="birthdate"
-          placeholder="DD/MM/YYYY"
-          class="form-control"
-          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-          (bsValueChange)="calculateAge($event)"
-          readonly
-          style="text-decoration: none; background-color: white;" 
-          bsDatepicker
-          
-        />
-        <label>อายุ</label>
-        <input type="number" [(ngModel)]="age" class="form-control" readonly />
-        <label>เพศ</label>
-        <select
-          class="custom-select"
-          aria-label="Default select example"
-          [(ngModel)]="gender"
-        >
-          <option value="" disabled selected hidden>กรุณาเลือกเพศ</option>
-          <option value="ชาย">ชาย</option>
-          <option value="หญิง">หญิง</option>
-          <option value="ไม่ระบุ">ไม่ระบุ</option>
-        </select>
+        <div class="row">
+          <!-- คอลัมน์ซ้าย -->
+          <div class="col-md-6">
+            <div class="form-group d-flex align-items-center mb-3">
+              <label class="mb-0" style="width: 60px;">ชื่อ</label>
+              <input
+                type="text"
+                [(ngModel)]="name"
+                class="form-control"
+                style="flex: 1;"
+              />
+            </div>
+
+            <div class="form-group d-flex align-items-center mb-3">
+              <label class="mb-0" style="width: 60px;">วันเกิด</label>
+              <input
+                [(bsValue)]="date1"
+                type="text"
+                [(ngModel)]="birthdate"
+                placeholder="DD/MM/YYYY"
+                class="form-control"
+                [bsConfig]="{ showWeekNumber: false, dateInputFormat: 'DD/MM/YYYY' }"
+                (bsValueChange)="calculateAge($event)"
+                readonly
+                style="text-decoration: none; background-color: white; flex: 1;"
+                bsDatepicker
+              />
+            </div>
+
+            <div class="form-group d-flex align-items-center mb-3">
+              <label class="mb-0" style="width: 60px;">เพศ</label>
+              <select
+                class="custom-select"
+                [(ngModel)]="gender"
+                style="flex: 1;"
+              >
+                <option value="" disabled selected hidden>กรุณาเลือกเพศ</option>
+                <option value="ชาย">ชาย</option>
+                <option value="หญิง">หญิง</option>
+                <option value="ไม่ระบุ">ไม่ระบุ</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- คอลัมน์ขวา -->
+          <div class="col-md-6">
+            <div class="form-group d-flex align-items-center mb-3">
+              <label class="mb-0" style="width: 60px;">นามสกุล</label>
+              <input
+                type="text"
+                [(ngModel)]="surname"
+                class="form-control"
+                style="flex: 1;"
+              />
+            </div>
+
+            <div class="form-group d-flex align-items-center mb-3">
+              <label class="mb-0" style="width: 60px;">อายุ</label>
+              <input
+                type="number"
+                [(ngModel)]="age"
+                class="form-control"
+                style="flex: 1;"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clearForm()">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="clearForm()"
+        >
           Close
         </button>
-        <button type="button" class="btn btn-primary" (click)="editIndex === null ? addData() : updateData()" data-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="editIndex === null ? addData() : updateData()"
+          data-dismiss="modal"
+        >
           Save changes
         </button>
       </div>
     </div>
   </div>
 </div>
+
+
 <!-- Modal Delete-->
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -123,7 +174,7 @@
         </button>
       </div>
       <div class="modal-body">
-        ต้องการลบชื่อผู้ใช้ลำดับที่ {{this.deleteIndex+1}} ใช่หรือไม่
+       <h5> ต้องการลบข้อมูลผู้ใช้ลำดับที่ {{this.deleteIndex+1}} ใช่หรือไม่ </h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clearForm()">Close</button>
