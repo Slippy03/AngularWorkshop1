@@ -1,0 +1,134 @@
+<div  style="margin: 20px;">
+  <h3>ผู้ใช้งาน</h3>
+  <nz-table
+    class="table"
+    #taoTable
+    [nzData]="datalist"
+    [nzFrontPagination]="true"
+    [nzShowPagination]="true"
+    [nzPageSize]="10"
+  >
+  
+    <thead>
+      <tr>
+        <th style="font-weight: bold;">ลำดับ</th>
+        <th style="font-weight: bold;">รหัสผู้ใช้งาน</th>
+        <th style="font-weight: bold;">ชื่อ-นามสกุล</th>
+        <th style="font-weight: bold;">วันเกิด</th>
+        <th style="font-weight: bold;">อายุ</th>
+        <th style="font-weight: bold;">เพศ</th>
+        <th style="font-weight: bold;">วันที่บันทึก</th>
+        <th style="font-weight: bold;">บันทึกโดย</th>
+        <th>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#formModal"
+              
+          >
+            <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of datalist; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.birthdate | thDate }}</td>
+        <td>{{ data.age }}</td>
+        <td>{{ data.gender }}</td>
+        <td>{{ data.SavedDate | thDate }}</td>
+        <td>{{ data.SavedBy }}</td>
+        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal" (click)="setEditData(i)">
+            Edit
+          </button>&nbsp;
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" (click)="setDeleteIndex(i)"> Del </button >
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+<!-- Modal Form -->
+<div
+  class="modal fade"
+  id="formModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          กรุณากรอกข้อมูลการใช้งาน
+        </h5>
+      </div>
+      <div class="modal-body">
+        <label>ชื่อ</label>
+        <input type="text" [(ngModel)]="name" class="form-control" />
+        <label>นามสกุล</label>
+        <input type="text" [(ngModel)]="surname" class="form-control" />
+        <label>วันเกิด</label>
+        <input
+          [(bsValue)]="date1"
+          type="text"
+          [(ngModel)]="birthdate"
+          placeholder="DD/MM/YYYY"
+          class="form-control"
+          [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+          (bsValueChange)="calculateAge($event)"
+          readonly
+          style="text-decoration: none; background-color: white;" 
+          bsDatepicker
+          
+        />
+        <label>อายุ</label>
+        <input type="number" [(ngModel)]="age" class="form-control" readonly />
+        <label>เพศ</label>
+        <select
+          class="custom-select"
+          aria-label="Default select example"
+          [(ngModel)]="gender"
+        >
+          <option value="" disabled selected hidden>กรุณาเลือกเพศ</option>
+          <option value="ชาย">ชาย</option>
+          <option value="หญิง">หญิง</option>
+          <option value="ไม่ระบุ">ไม่ระบุ</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clearForm()">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="editIndex === null ? addData() : updateData()" data-dismiss="modal">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Delete-->
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ต้องการลบชื่อผู้ใช้ลำดับที่ {{this.deleteIndex+1}} ใช่หรือไม่
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clearForm()">Close</button>
+        <button type="button" class="btn btn-primary " (click)="deleteData()" data-dismiss="modal">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
