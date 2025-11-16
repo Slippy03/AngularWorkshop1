@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Workshop1';
+    locales = ['th-be'];
+  locale = 'th-be';
+
+  constructor(private localeService: BsLocaleService) {
+    this.localeService.use(this.locale);
+  }
+
+  applyLocale(pop: any) {
+    this.localeService.use(this.locale);
+    pop.hide();
+    pop.show();
+  }
 }

@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ThDatePipe implements PipeTransform {
 
-  transform(value: Date | string | number, showTime: boolean = false): string {
+  transform(value:any, showTime: boolean = false): string {
     if (!value) return '';
 
     const date = new Date(value);
