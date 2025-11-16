@@ -112,7 +112,6 @@ export class TableComponent implements OnInit {
         timer: 2000,
       });
     } else {
-      // SweetAlert warning
       Swal.fire({
         icon: 'warning',
         title: 'กรุณากรอกข้อมูลให้ครบ',
@@ -145,7 +144,7 @@ export class TableComponent implements OnInit {
       });
     }
   }
-  //edit
+  //editForm
   editIndex: number | null = null;
   setEditData(index: number) {
     this.editIndex = index;
@@ -156,7 +155,7 @@ export class TableComponent implements OnInit {
     this.age = item.age;
     this.gender = item.gender;
   }
-
+//updatefromForm
   updateData() {
     if (this.editIndex === null) return;
 
@@ -170,12 +169,15 @@ export class TableComponent implements OnInit {
     ) {
       Swal.fire({
         icon: 'error',
-        title: 'กรอกข้อมูลให้ครบก่อนแก้ไขนะมึง',
+        title: 'กรุณากรอกข้อมูลให้ครบก่อนแก้ไข',
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
         timer: 2000,
-      });
+        
+
+      })
+      this.clearForm();;
       return;
     }
 
@@ -224,7 +226,6 @@ export class TableComponent implements OnInit {
 
     if (selectedDate > today) {
       this.age = null;
-
       Swal.fire({
         icon: 'warning',
         title: 'วันที่เกิดไม่ถูกต้อง',
@@ -232,6 +233,7 @@ export class TableComponent implements OnInit {
         toast: false,
         position: 'center',
         showConfirmButton: true,
+       
       });
 
       return;
